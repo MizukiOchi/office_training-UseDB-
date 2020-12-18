@@ -68,6 +68,9 @@ public class ResultsBean {
 		this.create_date = create_date;
 	}
 
+	/**
+	 * ?
+	 */
 	@Override
 	public String toString() {
 		return "ResultsBean [results_date=" + results_date + ", omikuji_id=" + omikuji_id + ", birthday=" + birthday

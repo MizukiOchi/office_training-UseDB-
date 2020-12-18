@@ -6,73 +6,71 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import DAO.DBManager;
 
+/**
+ * ●Fortune telling.csvをomikujiテーブルに読み込むメソッド
+ *
+ * @author m_ochi
+ *
+ */
 public class CSVReader {
-	// Fortune telling.csvファイルをomikjiテーブルに読み込むだけのクラス
-
 	public static void readCsv() throws IOException {
 		/**
-		 * ①Fortune telling.csvファイルを読み込む １、CSVファイルを１行ずつ読み込む
-		 * ２、CSVから読み込んだデータをコンソールへ出力する
+		 * ①Fortune telling.csvファイルを読み込む
+		 * １、CSVファイルを１行ずつ読み込む
 		 */
-		// ----------------------------------------
-		// １、CSVファイルを１行ずつ読み込む
-		// ----------------------------------------
+		// ①ー１、CSVファイルを１行ずつ読み込む
 		File file = new File("Fortune telling.csv");
 		try {
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			String data = "";
-			// CSVファイルの２行目から読み込む(不要な一行目をループ前に読み込んでいる。)
-			bufferedReader.readLine();
-			// ------------------------------------------------------------------------------------------------
-			// ２、CSVから読み込んだデータをコンソールへ出力する（※読み込まれているかを確認するため）
-			// ------------------------------------------------------------------------------------------------
+			bufferedReader.readLine(); // 不要な一行目をループ前に読み込んでいる。(CSVファイルの２行目から読み込見たいため。)
 			int x = 0;
-			// contentsというString型の箱をwhile文の外で作成しておく（※箱は１つで良いため）
+			// contentsというListのString型の箱をwhile文の外で作成しておく
+			//（※箱は１つで良いため。また、bufferedReaderはListのためString[]になっている。）
 			String[] contents;
 
-			// 読み込んだ値がnullじゃない限り読み込む処理をする
+			/**
+			 * 変数data(読み込んだ値)がnullじゃない限り読み込む処理をする
+			 *（※bufferedReader.readLine()で読み込まれたデータを変数dataに代入している）
+			 */
+
 			while ((data = bufferedReader.readLine()) != null) {
-				// // 値を分解する
+				 // 値を分解する
 				contents = data.split(",");
-				// // omikuji_idと紐づけるために上から順に番号をつける
+				 // omikuji_idと紐づけるために上から順に番号をつける
 				System.out.println("\nomikuji_id : " + x++);
 
 				// fortune_idにつける番号をswitch文を使用して割り当てる。
 				switch (contents[0]) {
 				case "大吉":
-					System.out.println(1);
+//					System.out.println(1);
 					break;
 				case "中吉":
-					System.out.println("fortune_id : " + 2);
+//					System.out.println("fortune_id : " + 2);
 					break;
 				case "小吉":
-					System.out.println("fortune_id : " + 3);
+//					System.out.println("fortune_id : " + 3);
 					break;
 				case "末吉":
-					System.out.println("fortune_id : " + 4);
+//					System.out.println("fortune_id : " + 4);
 					break;
 				case "吉":
-					System.out.println("fortune_id : " + 5);
+//					System.out.println("fortune_id : " + 5);
 					break;
 				case "凶":
-					System.out.println("fortune_id : " + 6);
+//					System.out.println("fortune_id : " + 6);
 					break;
 				}
-
-				System.out.println("運勢 : " + contents[0]);
-				System.out.println("願い事 : " + contents[1]);
-				System.out.println("商い : " + contents[2]);
-				System.out.println("学問 : " + contents[3]);
+//				System.out.println("運勢 : " + contents[0]);
+//				System.out.println("願い事 : " + contents[1]);
+//				System.out.println("商い : " + contents[2]);
+//				System.out.println("学問 : " + contents[3]);
 			}
-
-			// 最後にファイルを閉じてリソースを開放する
 			bufferedReader.close();
 		} catch (
 
@@ -83,51 +81,15 @@ public class CSVReader {
 		 * ①Fortune telling.csvファイルを読み込む １、CSVファイルを１行ずつ読み込む
 		 */
 		/**
-		 * ②JDBCを使用して読み込んだデータをomikujiテーブルに投入する （＊あとで別のクラスを作ること）
-		 * １、JDBCをしようしてDBへ接続 ２、CSVファイルを読み込んでDBへデータを入力する
+		 * ②JDBCを使用して読み込んだデータをomikujiテーブルに投入する １、JDBCをしようしてDBへ接続
+		 * ２、CSVファイルを読み込んでDBへデータを入力する
 		 */
 		Connection connection = null;
-		Statement statement = null;
-		ResultSet resultSet = null;
-		// ----------------------------------------
-		// ①ー１、CSVファイルを１行ずつ読み込む
-		// ----------------------------------------
-		// File file = new File("Fortune telling.csv");
 		try {
-			// FileReader fileReader = new FileReader(file);
-			// BufferedReader bufferedReader = new BufferedReader(fileReader);
-			// String data = "";
-			// // CSVファイルの２行目から読み込む(不要な一行目をループ前に読み込んでいる。)
-			// bufferedReader.readLine();
-
-			// -----------------
-			// ②ー１、JDBCを使用してDBへ接続
-			// -----------------
-			// ( "jdbc:postgresql://[場所(Domain)]:[ポート番号]/[DB名]",ログインロール,パスワード);
-			// connection =
-			// DriverManager.getConnection("jdbc:postgresql://localhost:5432/omikuji",
-			// "m_ochi",
-			// "mizusugatr09");
-
 			connection = DBManager.getConnection();
 			if (connection != null) {
-				System.out.println("yeah");
 			}
-			statement = connection.createStatement();
-			// //DBにきちんと接続できとるかを確認
-			// //-----------------
-			// // SQLの発行
-			// //-----------------
-			// //ユーザー情報のテーブル
-			// //DBから値を取得
-			// resultSet = statement.executeQuery("SELECT * FROM fortune");
-			// System.out.println("DB接続確認");
-			// while (resultSet.next()) {
-			// int fortune_id = resultSet.getInt("fortune_id");
-			// System.out.println(fortune_id);
-			// String fortune_name = resultSet.getString("fortune_name");
-			// System.out.println(fortune_name);
-			// }
+			// statement = connection.createStatement();
 
 			FileReader fileReader1 = new FileReader(file);
 			BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
@@ -170,7 +132,7 @@ public class CSVReader {
 				ps.setString(6, ochi);
 				ps.setString(7, ochi);
 				System.out.println(ps);
-				 ps.executeUpdate();
+				ps.executeUpdate();
 				// connection.commit();
 				// System.out.println(sql);
 			}
@@ -179,7 +141,12 @@ public class CSVReader {
 			e.getMessage();
 		}
 	}
-
+/**
+ * csvから読み込んだ文字列をomikuji_idの数字に変換するメソッド
+ * （csvとomikujiテーブルのomikuji_idとfortuneテーブルのomikuji_idとを紐づけるため。）
+ * @param s
+ * @return
+ */
 	// fortune_idを文字から数字に割り当てたメソッド（例：大吉の場合 → １）
 	private static int JudgeUnseiCode(String s) {
 		int unsei = 0;

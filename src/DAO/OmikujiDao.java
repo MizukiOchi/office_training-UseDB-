@@ -8,8 +8,8 @@ import Bean.OmikujiBean;
 
 public class OmikujiDao {
 	/**
-	 * ④ '③（resultsテーブルからデータを取得）で取得したデータのomikuji__idを使用して、omikujiテーブルとfortuneテーブルの結合したデータを取得
-	 *
+	 * ●omikuji_idを条件におみくじを検索するメソッド
+	 *（出力できるようにfortuneテーブルと結合している）
 	 * @param omikuji_id
 	 * @return omikujiBean
 	 */
@@ -55,7 +55,8 @@ public class OmikujiDao {
 	}
 
 	/**
-	 * randomの引数(omikujiテーブルの登録数)をSQLのCountを使用して取得する
+	 * omikujiテーブルの件数を検索するメソッド。
+	 * （randomの引数(omikujiテーブルの登録数)をSQLのCountを使用して取得するため）
 	 *
 	 * @param num
 	 * @return resultsBean
@@ -69,7 +70,7 @@ public class OmikujiDao {
 		try {
 			// DBに接続する
 			connection = DBManager.getConnection();
-			// sqlにselect文を入れる
+			// sqlにselect文を入れる（AS テーブル名（今回はnum）:１時的にnumテーブルを作成する）
 			String sql = "SELECT COUNT(*) AS num FROM omikuji; ";
 			// PreparedStatementは条件を動的にしてjavaで条件を自由に変更できる
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
