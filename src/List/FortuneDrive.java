@@ -79,8 +79,10 @@ public class FortuneDrive {
 			 * Randomでomikuji_idを取得する
 			 */
 			Random random = new Random();
+			int ranum = 48;
 			// DBの接続して、randomの引数をSQLのCountを使用して取得する
-			int randomValue = random.nextInt(num + 1); //０からカウントされるため＋１をする
+			int randomValue = random.nextInt(ranum + 1); //０からカウントされるため＋１をする
+//			System.out.println("ランダムした数字は : "+randomValue);
 			String omikuji_id = Integer.toString(randomValue);
 
 			/**
