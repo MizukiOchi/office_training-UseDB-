@@ -72,7 +72,7 @@ public class FortuneDrive {
 			 */
 			Random random = new Random();
 			// DBの接続して、randomの引数をSQLのCountを使用して取得する
-			int randomValue = random.nextInt(omikujiCnt) + 1; // ０からカウントされるため＋１をする
+			int randomValue = random.nextInt(omikujiCnt) + 1; // メソッドが０からカウントされるため、メソッド（）＋１をする
 			System.out.println(randomValue);
 			omikuji_id = Integer.toString(randomValue);
 
@@ -104,7 +104,8 @@ public class FortuneDrive {
 				birthday = reader.readLine(); // 文字を入力するためのメソッドをbirthdayに代入。
 
 				/**
-				 * ①入力チェックをする。 １、入力された日付が８桁以外の場合は、エラーメッセージを出力
+				 * ①入力チェックをする。
+				 * １、入力された日付が８桁以外の場合は、エラーメッセージを出力
 				 * ２、正しい年月日かどうか入力チェックする。
 				 */
 				// ①ー１、入力されたのが８桁かどうかをチェックする。
