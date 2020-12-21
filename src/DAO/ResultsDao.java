@@ -27,8 +27,7 @@ public class ResultsDao {
 			connection = DBManager.getConnection();
 
 			/**
-			 * ②resultsテーブルから以下の２つを条件にデータを取得。
-			 * １、mainメソッドで取得した本日の日付（results_date）
+			 * ②resultsテーブルから以下の２つを条件にデータを取得。 １、mainメソッドで取得した本日の日付（results_date）
 			 * ２、FortuneDriveのcheckBirthdayメソッドで取得した誕生日（birthday）
 			 */
 			// ●変数sqlに条件検索できるようにSELECT文を代入
@@ -39,7 +38,6 @@ public class ResultsDao {
 			preparedStatement.setString(2, birthday); // ②ー２
 			// ●executeQueryメソッドを呼び出してSELECT文を実行して、実行結果（=検索結果）をResultSet型の変数に代入
 			ResultSet resultSet = preparedStatement.executeQuery();
-
 			// ●変数resultSetに入っている実行結果をResultsBeanにsetしながら１行ずつ読み込む
 			// （=条件に一致しているデータがあれば、変数resultSetに代入されている）
 			while (resultSet.next()) {
@@ -51,7 +49,7 @@ public class ResultsDao {
 				resultsBean.setAuthor(resultSet.getString("author"));
 				resultsBean.setCreate_date(resultSet.getString("create_date"));
 				// ↑※利用しないフィールドも今後利用するかもしれないためセットしていることが多い。
-				//  その理由から今回もセットしている。
+				// その理由から今回もセットしている。
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,11 +61,12 @@ public class ResultsDao {
 
 	/**
 	 * ●result_date・omikuji_id・birthdayを動的に、その他のカラムは固定でINSERTするメソッド
-	 * @param results_date, birthday, omikuji_id
+	 *
+	 * @param results_date,
+	 *            birthday, omikuji_id
 	 * @return resultsBean
 	 */
 	public static void insertResults(Date results_date, String omikuji_id, String birthday) {
-
 		Connection connection = null;
 		PreparedStatement ps = null;
 		try {
@@ -82,16 +81,10 @@ public class ResultsDao {
 			preparedStatement.setString(3, birthday);
 			// resultsテーブルから値を取得
 			preparedStatement.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		} finally {
-
 			DBManager.close(ps, connection);
-
 		}
-
 	}
-
 }

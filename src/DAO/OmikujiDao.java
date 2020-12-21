@@ -61,7 +61,6 @@ public class OmikujiDao {
 	 * @param num
 	 * @return resultsBean
 	 */
-	// TODO レコード数をカウントするメソッドを作成する↓
 	public static int count() {
 
 		Connection connection = null;
