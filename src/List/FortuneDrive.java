@@ -12,7 +12,6 @@ import Bean.OmikujiBean;
 import Bean.ResultsBean;
 import DAO.OmikujiDao;
 import DAO.ResultsDao;
-//j
 
 /**
  * ❶メインメソッド
