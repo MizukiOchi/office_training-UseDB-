@@ -73,7 +73,6 @@ public class FortuneDrive {
 			Random random = new Random();
 			// DBの接続して、randomの引数をSQLのCountを使用して取得する
 			int randomValue = random.nextInt(omikujiCnt) + 1; // メソッドが０からカウントされるため、メソッド（）＋１をする
-			System.out.println(randomValue);
 			omikuji_id = Integer.toString(randomValue);
 
 			/**
